@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shared-gateway
+  namespace: gateway-system
+spec:
+  gatewayClassName: shared-gateway-class
+  listeners:
+  - name: servera
+    hostname: serverA.example.com
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All  # allow routes from all namespaces (multi-tenant)
+  - name: serverb
+    hostname: serverB.example.com
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All

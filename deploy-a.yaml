@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b
+  labels:
+    tenant: tenant-b
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servera-service
+  namespace: tenant-a
+spec:
+  selector:
+    app: servera
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servera
+  namespace: tenant-a
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: servera
+  template:
+    metadata:
+      labels:
+        app: servera
+    spec:
+      containers:
+      - name: app
+        image: hashicorp/http-echo
+        args: ["-text=Hello from ServerA"]
+        ports:
+        - containerPort: 8080
