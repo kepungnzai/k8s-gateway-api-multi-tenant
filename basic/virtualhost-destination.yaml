@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews-destination
+spec:
+  host: reviews   # MUST match VirtualService hosts
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  gateways:
+    - shared-gateway.gateway-system.svc.cluster.local  # MUST match Gateway name and namespace
+  hosts:
+    - reviews       # MUST match DestinationRule host
+  http:
+    - route:
+        - destination:
+            host: reviews
+            subset: v1    # MUST match DestinationRule subset

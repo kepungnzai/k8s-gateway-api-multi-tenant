@@ -6,9 +6,9 @@ metadata:
 spec:
   parentRefs:
   - name: shared-gateway
-    namespace: gateway-system
+    namespace: default
   hostnames:
-  - serverA.example.com
+  - servera.example.com
   rules:
   - matches:
     - path:
@@ -17,3 +17,4 @@ spec:
     backendRefs:
     - name: servera-service
       port: 8080
+      namespace: tenant-a

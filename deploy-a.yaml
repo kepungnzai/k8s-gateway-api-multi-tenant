@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tenant-b
+  name: tenant-a
   labels:
-    tenant: tenant-b
+    tenant: tenant-a
 ---
 apiVersion: v1
 kind: Service
@@ -23,7 +23,7 @@ metadata:
   name: servera
   namespace: tenant-a
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: servera
@@ -33,8 +33,8 @@ spec:
         app: servera
     spec:
       containers:
-      - name: app
-        image: hashicorp/http-echo
-        args: ["-text=Hello from ServerA"]
+      - image: docker.io/mccutchen/go-httpbin:v2.15.0
+        imagePullPolicy: IfNotPresent
+        name: httpbin
         ports:
         - containerPort: 8080
