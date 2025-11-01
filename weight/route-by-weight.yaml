@@ -28,7 +28,7 @@ spec:
   host: reviews
   trafficPolicy:
     loadBalancer:
-      simple: ROUND_ROBIN   # <-- This enables round-robin
+      simple: ROUND_ROBIN # <-- This enables round-robin, other option are LEAST_CONN
   subsets:
   - name: v1
     labels:

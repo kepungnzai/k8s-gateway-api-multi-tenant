@@ -16,5 +16,5 @@ spec:
         value: /
     backendRefs:
     - name: serverb-service
-      port: 8080
+      port: 5000
       namespace: tenant-b

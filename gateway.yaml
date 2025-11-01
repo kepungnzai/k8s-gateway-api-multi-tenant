@@ -4,7 +4,7 @@ metadata:
   name: shared-gateway
   namespace: default
 spec:
-  gatewayClassName: istio
+  gatewayClassName: istio # <-- important when you're using istio
   listeners:
   - name: servera
     hostname: servera.example.com
